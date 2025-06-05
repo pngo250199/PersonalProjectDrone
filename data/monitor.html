@@ -1,0 +1,23 @@
+ <!DOCTYPE html>
+  <html>
+  <head>
+    <title>ESP32 LED Monitor</title>
+    <script>
+      function fetchStatus() {
+        fetch('/status')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById("led1").textContent = data.led1State;
+            document.getElementById("led2").textContent = data.led2State;
+          });
+      }
+      setInterval(fetchStatus, 1000); // every 1 second
+      window.onload = fetchStatus;
+    </script>
+  </head>
+  <body style="text-align:center; font-family:sans-serif;">
+    <h1>ESP32 LED Monitoring (FreeRTOS)</h1>
+    <p>LED 1 State: <strong id="led1">Loading...</strong></p>
+    <p>LED 2 State: <strong id="led2">Loading...</strong></p>
+  </body>
+  </html>
